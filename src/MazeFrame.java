@@ -28,7 +28,7 @@ public class MazeFrame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		Maze maze = new Maze(10,10);
+		Maze maze = new Maze(15,15);
 		new MazeFrame(maze).setVisible(true);
 	}
 }
