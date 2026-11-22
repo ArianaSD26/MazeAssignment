@@ -5,18 +5,36 @@ import javax.swing.*;
 
 public class MazeCanvas extends JPanel {
 	private Maze maze;
+	private MazeGenerator generator;
 	
-	public MazeCanvas(Maze m) {
+	public MazeCanvas(Maze m, MazeGenerator g) {
 		maze = m;
+		generator = g;
 	}
 	
 	private void drawCell(Graphics g, Cell c, int top, int left, int cd) {
+		
 		top = top + 5;
 		left = left + 5;
 		
 		if(c.getVisited()) {
-			g.setColor(new Color(230, 214, 255));
-			g.fillRect(left+1, top+1, cd-1, cd-1);
+			g.setColor(new Color(214, 180, 252));
+			g.fillRect(left, top, cd, cd);
+		}
+		
+		if(c == maze.getCell(0, 0)) {
+			g.setColor(new Color(255, 215, 0));
+			g.fillRect(left, top, cd, cd);
+		}
+		
+		if(c == generator.getCurrent()) {
+			g.setColor(new Color(35, 0, 115));
+			g.fillRect(left, top, cd, cd);
+		}
+		
+		if(c == maze.getCell(maze.getN(), maze.getM())) {
+			g.setColor(new Color(128, 0, 0));
+			g.fillRect(left, top, cd, cd);
 		}
 		
 		g.setColor(Color.BLACK);

@@ -9,7 +9,7 @@ public class MazeFrame extends JFrame{
 	public MazeFrame(Maze m) {
 		maze = m;
 		MazeGenerator g = new MazeGenerator(maze);
-		MazeCanvas c = new MazeCanvas(maze);
+		MazeCanvas c = new MazeCanvas(maze, g);
 		
 		setTitle("My Perfect Maze!");
 		setSize(500, 500);

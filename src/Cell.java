@@ -1,6 +1,6 @@
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.awt.*;
+import java.util.*;
 
 public class Cell {
 	private boolean top, bottom, left, right, visited;
