@@ -33,6 +33,10 @@ public class Maze {
 	}
 	
 	public Cell getCell(int r, int c) {
+		if (r < 0 || c < 0 || r >= N || c >= M) {
+			return null;
+		}
+		
 		return grid[r][c];
 	}
 }

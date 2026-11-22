@@ -1,7 +1,11 @@
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Cell {
 	private boolean top, bottom, left, right, visited;
 	private int row, col;
+	private Maze maze;
 	
 	public Cell(int r, int c) {
 		top = bottom = left = right = true;
@@ -64,5 +68,32 @@ public class Cell {
 	
 	public void setCol(int c) {
 		col = c;
+	}
+	
+	public Cell getNeighbour(Maze m) {
+		ArrayList<Cell> neighbours = new ArrayList<Cell>();
+		Random r = new Random();
+		
+		Cell top = m.getCell(row-1, col);
+		Cell bottom = m.getCell(row+1, col);
+		Cell left = m.getCell(row, col-1);
+		Cell right = m.getCell(row, col+1);
+		
+		if(top != null && !top.visited)
+			neighbours.add(top);
+		if(bottom != null && !bottom.visited)
+			neighbours.add(bottom);
+		if(left != null && !left.visited)
+			neighbours.add(left);
+		if(right != null && !right.visited)
+			neighbours.add(right);
+		
+		if(neighbours.size() > 0) {
+			int i = r.nextInt(neighbours.size());
+			return neighbours.get(i);
+		}
+		else {
+			return null;
+		}
 	}
 }

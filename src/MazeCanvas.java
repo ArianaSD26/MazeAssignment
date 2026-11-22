@@ -1,7 +1,9 @@
 
 import java.awt.*;
 
-public class MazeCanvas extends Canvas {
+import javax.swing.*;
+
+public class MazeCanvas extends JPanel {
 	private Maze maze;
 	
 	public MazeCanvas(Maze m) {
@@ -11,6 +13,13 @@ public class MazeCanvas extends Canvas {
 	private void drawCell(Graphics g, Cell c, int top, int left, int cd) {
 		top = top + 5;
 		left = left + 5;
+		
+		if(c.getVisited()) {
+			g.setColor(new Color(230, 214, 255));
+			g.fillRect(left+1, top+1, cd-1, cd-1);
+		}
+		
+		g.setColor(Color.BLACK);
 		
 		if(c.getTop())
 			g.drawLine(left, top, left+cd, top);
@@ -23,7 +32,7 @@ public class MazeCanvas extends Canvas {
 	}
 	
 	@Override
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		int w = getWidth();
 		int h = getHeight();
 		
