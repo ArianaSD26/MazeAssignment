@@ -1,13 +1,23 @@
 
 import java.util.ArrayList;
 
+/**
+ * Solves the maze using Breadth-First Search 
+ */
 public class MazeSolver {
+	/**
+	 * Declares variables for current cell, maze, neighbours, path and queue
+	 */
 	private Cell current;
 	private Maze maze;
 	private ArrayList<Cell> neighbours;
 	private ArrayList<Cell> path;
 	private Queue queue;
 	
+	/**
+	 * Constructs a maze solver with a specified maze, starting on cell (0,0) and queue
+	 * @param m
+	 */
 	public MazeSolver(Maze m) {
 		maze = m;
 		current = maze.getCell(0, 0);
@@ -15,6 +25,25 @@ public class MazeSolver {
 		queue = new Queue();
 	}
 	
+	/**
+	 * Gets path
+	 * @return the winning path
+	 */
+	public ArrayList<Cell> getPath() {
+		return path;
+	}
+	
+	/**
+	 * Gets current
+	 * @return the current cell
+	 */
+	public Cell getCurrent() {
+		return current;
+	}
+	
+	/**
+	 * Solves the maze using BFS and a queue by finding neighbours and the parent cell to create a path
+	 */
 	public void solve() {
 		current.setVisited(true);
 		
@@ -31,6 +60,11 @@ public class MazeSolver {
 		}
 	}
 	
+	/**
+	 * Gets neighbours of the current cell
+	 * @param c the current cell
+	 * @return list of neighbours
+	 */
 	private ArrayList<Cell> getNeighbours(Cell c) {
 		neighbours = new ArrayList<Cell>();
 		
@@ -55,20 +89,15 @@ public class MazeSolver {
 		return neighbours;
 	}
 	
-	public void getWinningPath() {
+	/**
+	 * Gets the winning path by storing the parent cells
+	 */
+	public void findPath() {
 		Cell c = maze.getCell(maze.getN()-1, maze.getM()-1);
 		
 		while(c != null) {
 			path.add(c);
 			c = c.getParent();
 		}
-	}
-	
-	public ArrayList<Cell> getPath() {
-		return path;
-	}
-	
-	public Cell getCurrent() {
-		return current;
 	}
 }

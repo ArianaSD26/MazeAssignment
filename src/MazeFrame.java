@@ -3,10 +3,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * GUI using Java Swing
+ */
 public class MazeFrame extends JFrame{
+	/**
+	 * Declared variables for maze and timers for generate and solver
+	 */
 	private Maze maze;
 	private Timer t1, t2;
 	
+	/**
+	 * Constructs a maze frame with the specified maze, generator, solver and canvas as well as timers to delay the algorithms
+	 * @param m
+	 */
 	public MazeFrame(Maze m) {
 		maze = m;
 		MazeGenerator g = new MazeGenerator(maze);
@@ -46,7 +56,7 @@ public class MazeFrame extends JFrame{
 							
 							if(s.getCurrent() == maze.getCell(maze.getN()-1, maze.getM()-1)) {
 								t2.stop();
-								s.getWinningPath();
+								s.findPath();
 								c.repaint();
 							}
 						}
@@ -60,6 +70,10 @@ public class MazeFrame extends JFrame{
 		t1.start();
 	}
 	
+	/**
+	 * Creates the maze and displays the program
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Maze maze = new Maze(10, 10);
 		new MazeFrame(maze).setVisible(true);

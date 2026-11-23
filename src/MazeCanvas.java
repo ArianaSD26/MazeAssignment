@@ -3,12 +3,24 @@ import java.awt.*;
 
 import javax.swing.*;
 
+/**
+ * Custom drawing panel that renders the maze and visual states
+ */
 public class MazeCanvas extends JPanel {
+	/**
+	 * Declares variables for maze, generator, solver and whether the program is generating or solving
+	 */
 	private Maze maze;
 	private MazeGenerator generator;
 	private MazeSolver solver;
 	private boolean generate, solve;
 	
+	/**
+	 * Constructs a canvas with the specified maze, generator and solver as well as not generating or solving
+	 * @param m the maze
+	 * @param g the maze generator
+	 * @param s the maze solver
+	 */
 	public MazeCanvas(Maze m, MazeGenerator g, MazeSolver s) {
 		maze = m;
 		generator = g;
@@ -16,22 +28,46 @@ public class MazeCanvas extends JPanel {
 		generate = solve = false;
 	}
 	
+	/**
+	 * Gets generate
+	 * @return true if the program is generating or false if not
+	 */
 	public boolean getGenerate() {
 		return generate;
 	}
 	
+	/**
+	 * Sets generate
+	 * @param g takes in whether the program is generating
+	 */
 	public void setGenerate(boolean g) {
 		generate = g;
 	}
 	
+	/**
+	 * Gets solve
+	 * @return true if the program is solving or false if not
+	 */
 	public boolean getSolve() {
 		return solve;
 	}
 	
+	/**
+	 * Sets solve
+	 * @param s takes in whether the program is solving
+	 */
 	public void setSolve(boolean s) {
 		solve = s;
 	}
 	
+	/**
+	 * Draws a cell of the maze
+	 * @param g the graphics
+	 * @param c the cell
+	 * @param top the y position
+	 * @param left the x position
+	 * @param cd the cell dimensions
+	 */
 	private void drawCell(Graphics g, Cell c, int top, int left, int cd) {
 		top = top + 5;
 		left = left + 5;
@@ -89,6 +125,10 @@ public class MazeCanvas extends JPanel {
 			g.drawLine(left+cd,  top,  left+cd, top+cd);
 	}
 	
+	/**
+	 * Paints the maze in the GUI
+	 * @param g the graphics
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		int w = getWidth();
