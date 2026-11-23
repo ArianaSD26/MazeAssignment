@@ -6,20 +6,58 @@ import javax.swing.*;
 public class MazeCanvas extends JPanel {
 	private Maze maze;
 	private MazeGenerator generator;
+	private MazeSolver solver;
+	private boolean generate, solve;
 	
-	public MazeCanvas(Maze m, MazeGenerator g) {
+	public MazeCanvas(Maze m, MazeGenerator g, MazeSolver s) {
 		maze = m;
 		generator = g;
+		solver = s;
+		generate = solve = false;
+	}
+	
+	public boolean getGenerate() {
+		return generate;
+	}
+	
+	public void setGenerate(boolean g) {
+		generate = g;
+	}
+	
+	public boolean getSolve() {
+		return solve;
+	}
+	
+	public void setSolve(boolean s) {
+		solve = s;
 	}
 	
 	private void drawCell(Graphics g, Cell c, int top, int left, int cd) {
-		
 		top = top + 5;
 		left = left + 5;
 		
-		if(c.getVisited()) {
-			g.setColor(new Color(214, 180, 252));
-			g.fillRect(left, top, cd, cd);
+		if(generate) {
+			if(c.getVisited()) {
+				g.setColor(new Color(225, 225, 225));
+				g.fillRect(left, top, cd, cd);
+			}
+		
+			if(c == generator.getCurrent()) {
+				g.setColor(Color.GRAY);
+				g.fillRect(left, top, cd, cd);
+			}
+		}
+		
+		if(solve) {
+			if(c.getVisited()) {
+				g.setColor(new Color(255, 204, 238));
+				g.fillRect(left, top, cd, cd);
+			}
+			
+			if(c == solver.getCurrent()) {
+				g.setColor(new Color(255, 102, 204));
+				g.fillRect(left, top, cd, cd);
+			}
 		}
 		
 		if(c == maze.getCell(0, 0)) {
@@ -27,13 +65,8 @@ public class MazeCanvas extends JPanel {
 			g.fillRect(left, top, cd, cd);
 		}
 		
-		if(c == generator.getCurrent()) {
-			g.setColor(new Color(35, 0, 115));
-			g.fillRect(left, top, cd, cd);
-		}
-		
-		if(c == maze.getCell(maze.getN(), maze.getM())) {
-			g.setColor(new Color(128, 0, 0));
+		if(c == maze.getCell(maze.getN()-1, maze.getM()-1)) {
+			g.setColor(Color.CYAN);
 			g.fillRect(left, top, cd, cd);
 		}
 		

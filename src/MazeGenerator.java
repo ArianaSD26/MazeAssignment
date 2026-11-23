@@ -3,12 +3,12 @@ import java.awt.Color;
 public class MazeGenerator {
 	private Cell current;
 	private Maze maze;
-	private Stack s;
+	private Stack stack;
 	
 	public MazeGenerator(Maze m) {
 		maze = m;
 		current = m.getCell(0, 0);
-		s = new Stack();
+		stack = new Stack();
 	}
 	
 	public void generate() {
@@ -17,13 +17,13 @@ public class MazeGenerator {
 
 		if(neighbour != null) {
 			neighbour.setVisited(true);
-			s.push(current);
+			stack.push(current);
 			removeWalls(current, neighbour);
 			neighbour.setVisited(true);
 			current = neighbour;
 		}
-		else if (!s.isEmpty()) {
-			current = (Cell) s.pop();
+		else if (!stack.isEmpty()) {
+			current = (Cell) stack.pop();
 		}
 
 	}
@@ -54,8 +54,7 @@ public class MazeGenerator {
 		return current;
 	}
 	
-	public void setCurrent(Cell c) {
-		current = c;
+	public Stack getStack() {
+		return stack;
 	}
-	
 }
