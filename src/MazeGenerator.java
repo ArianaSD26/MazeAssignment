@@ -13,13 +13,16 @@ public class MazeGenerator {
 	
 	public void generate() {
 		current.setVisited(true);
-		Cell neighbour = current.getNeighbour(maze);
+		Cell neighbour = null;
+		
+		if(current != maze.getCell(maze.getN()-1, maze.getM()-1)) {
+			neighbour = current.getNeighbour(maze);
+		}
 
 		if(neighbour != null) {
 			neighbour.setVisited(true);
 			stack.push(current);
 			removeWalls(current, neighbour);
-			neighbour.setVisited(true);
 			current = neighbour;
 		}
 		else if (!stack.isEmpty()) {

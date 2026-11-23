@@ -1,6 +1,6 @@
 
 public class Queue implements QueueInterface{
-	private final int MAX_QUEUE = 50;
+	private final int MAX_QUEUE = 1000000;
 	private Object[] items;
 	private int front, back, count;
 	

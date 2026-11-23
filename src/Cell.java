@@ -6,6 +6,7 @@ public class Cell {
 	private boolean top, bottom, left, right, visited;
 	private int row, col;
 	private Maze maze;
+	private Cell parent;
 	
 	public Cell(int r, int c) {
 		top = bottom = left = right = true;
@@ -68,6 +69,14 @@ public class Cell {
 	
 	public void setCol(int c) {
 		col = c;
+	}
+	
+	public Cell getParent() {
+		return parent;
+	}
+	
+	public void setParent(Cell p) {
+		parent = p;
 	}
 	
 	public Cell getNeighbour(Maze m) {

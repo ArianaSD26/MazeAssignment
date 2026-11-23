@@ -5,10 +5,14 @@ public class MazeSolver {
 	private Cell current;
 	private Maze maze;
 	private ArrayList<Cell> neighbours;
+	private ArrayList<Cell> path;
+	private Queue queue;
 	
 	public MazeSolver(Maze m) {
 		maze = m;
 		current = maze.getCell(0, 0);
+		path = new ArrayList<Cell>();
+		queue = new Queue();
 	}
 	
 	public void solve() {
@@ -17,15 +21,17 @@ public class MazeSolver {
 		neighbours = getNeighbours(current);
 		
 		for(Cell neighbour : neighbours) {
-			if(neighbour != null) {
-				neighbour.setVisited(true);
-				current = neighbour;
-			}
-			
+			neighbour.setVisited(true);
+			neighbour.setParent(current);
+			queue.enqueue(neighbour);
+		}
+		
+		if(!queue.isEmpty()) {
+			current = (Cell) queue.dequeue();
 		}
 	}
 	
-	public ArrayList<Cell> getNeighbours(Cell c) {
+	private ArrayList<Cell> getNeighbours(Cell c) {
 		neighbours = new ArrayList<Cell>();
 		
 		Cell top = maze.getCell(c.getRow()-1, c.getCol());
@@ -47,6 +53,19 @@ public class MazeSolver {
 		}
 		
 		return neighbours;
+	}
+	
+	public void getWinningPath() {
+		Cell c = maze.getCell(maze.getN()-1, maze.getM()-1);
+		
+		while(c != null) {
+			path.add(c);
+			c = c.getParent();
+		}
+	}
+	
+	public ArrayList<Cell> getPath() {
+		return path;
 	}
 	
 	public Cell getCurrent() {

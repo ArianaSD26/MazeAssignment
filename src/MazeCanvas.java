@@ -50,13 +50,20 @@ public class MazeCanvas extends JPanel {
 		
 		if(solve) {
 			if(c.getVisited()) {
-				g.setColor(new Color(255, 204, 238));
+				g.setColor(new Color(207, 159, 255));
 				g.fillRect(left, top, cd, cd);
 			}
 			
 			if(c == solver.getCurrent()) {
-				g.setColor(new Color(255, 102, 204));
+				g.setColor(new Color(157, 78, 221));
 				g.fillRect(left, top, cd, cd);
+			}
+			
+			for(Cell path : solver.getPath()) {
+				if(c == path) {
+					g.setColor(new Color(157, 78, 221));
+					g.fillOval(left+10, top+10, cd-20, cd-20);
+				}
 			}
 		}
 		

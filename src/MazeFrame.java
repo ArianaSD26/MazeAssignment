@@ -18,7 +18,7 @@ public class MazeFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(c);
 		
-		t1 = new Timer(100, new ActionListener() {
+		t1 = new Timer(50, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c.setSolve(false);
@@ -38,11 +38,17 @@ public class MazeFrame extends JFrame{
 					c.setGenerate(false);
 					c.setSolve(true);
 					
-					t2 = new Timer(100, new ActionListener() {
+					t2 = new Timer(50, new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							s.solve();
 							c.repaint();
+							
+							if(s.getCurrent() == maze.getCell(maze.getN()-1, maze.getM()-1)) {
+								t2.stop();
+								s.getWinningPath();
+								c.repaint();
+							}
 						}
 					});
 					
